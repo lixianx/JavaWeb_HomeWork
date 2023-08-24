@@ -53,3 +53,4 @@ source tables.sql路径
 ![image](https://github.com/lixianx/my_webplatform/blob/main/images/FB9O1K8X7%60ECH6%5B)SH7NV~C.png?raw=true)
 ![image](https://github.com/lixianx/my_webplatform/blob/main/images/%60%7DL~%7BFS%5B2F1D49Z%60FHK%60%7DNT.png?raw=true)
 ### 点击调试，成功访问到主页
+![image](https://github.com/lixianx/my_webplatform/blob/main/images/ATEZ7AO7%7BGWLR@P@AFT@S%256.png?raw=true)
