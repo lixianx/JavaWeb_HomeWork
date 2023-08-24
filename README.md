@@ -26,18 +26,19 @@ JDK 17、Mysql 8.0、Tomcat 10.0
 https://github.com/lixianx/JavaWeb_HomeWork.git
 ### 2.打开Idea，选择从CSV获取
 ### 3.输入项目地址，点击克隆
-### 4.配置web框架
-### 5.打开项目结构添加依赖
-### 6.添加Tomcat目录下的JSP-api.jar和Servlet-api.jar及SDK
-### 7.添加工件
-### 8.添加本地Tomcat配置
-### 9.设置自己的Tomcat路径
-### 10.点击部署，添加工件
+## 3.项目配置
+### 1.配置web框架
+### 2.打开项目结构添加依赖
+### 3.添加Tomcat目录下的JSP-api.jar和Servlet-api.jar及SDK
+### 4.添加工件
+### 5.添加本地Tomcat配置
+### 6.设置自己的Tomcat路径
+### 7.点击部署，添加工件
     可更改项目名
-### 11.下载本仓库根目录下的tables.sql文件，登录Mysql，选择一个数据库输入以下代码建表(均为空表）
+### 8.下载本仓库根目录下的tables.sql文件，登录Mysql，选择一个数据库输入以下代码建表(均为空表）
 ```
 source tables.sql路径
 ```
-### 12.找到src目录下的resource包里的两个配置文件，按要求更改
+### 9.找到src目录下的resource包里的两个配置文件，按要求更改
 若未开通阿里云短信服务，可直接在user表中添加用户，直接登录
 ### 点击调试，成功访问到主页
