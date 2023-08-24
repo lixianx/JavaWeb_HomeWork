@@ -38,7 +38,7 @@ https://github.com/lixianx/JavaWeb_HomeWork.git
 ### 4.添加工件
 ![image](https://github.com/lixianx/my_webplatform/blob/main/images/%5D3@2B%604DT%25658%5BMMQB%5D%25XZR.png?raw=true)
 ### 5.添加本地Tomcat配置
-![image](https://github.com/lixianx/my_webplatform/blob/main/images/%25A@(66UP1R64L)J@9AP7)%7DT.png?raw=true)
+![image](https://github.com/lixianx/my_webplatform/blob/5c97aec4e4f8b5f3321d8c0abfc6f38fdc16d26e/images/%25A%40(66UP1R64L)J%409AP7)%7DT.png)
 ### 6.设置自己的Tomcat路径
 ![image](https://github.com/lixianx/my_webplatform/blob/main/images/BEA7WHY3U85K$4%7DZR~G5381.png?raw=true)
 ### 7.点击部署，添加工件
