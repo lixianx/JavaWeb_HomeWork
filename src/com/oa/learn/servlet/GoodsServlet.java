@@ -178,6 +178,7 @@ public class GoodsServlet extends HttpServlet {
 
         try {
             conn = DBUtils.getConnection();
+            conn.setAutoCommit(false);
             String sql = "select * from usercar where goodid=? and username=?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, no);
@@ -192,6 +193,7 @@ public class GoodsServlet extends HttpServlet {
                 ps.setString(4, maxNum);
                 count = ps.executeUpdate();
                 if(count == 1){
+                    conn.commit();
                     flag = true;
                 }
             }

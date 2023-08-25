@@ -83,8 +83,8 @@
     const keywords = document.getElementById("keywords").value
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
-      if(this.readyState == 4){
-        if(this.status == 200){
+      if(this.readyState === 4){
+        if(this.status === 200){
           const json = JSON.parse(this.responseText);
           var html = ""
           for (let i = 0; i < json.length; i ++){
@@ -115,8 +115,8 @@
       const keywords = document.getElementById("keywords").value
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {
-        if(this.readyState == 4){
-          if(this.status == 200){
+        if(this.readyState === 4){
+          if(this.status === 200){
             const json = JSON.parse(this.responseText);
             var html = ""
             for (let i = 0; i < json.length; i ++){
@@ -147,7 +147,7 @@
   }
   function del(id) {
     if (window.confirm("确认删除?")) {
-      document.location.href = "<%= request.getContextPath() %>/user/delete?id=" + id;
+      de(id)
     }
   }
 
@@ -159,6 +159,29 @@
 
   function formatTimestamp(timestamp) {
     return new Date(timestamp);
+  }
+
+  function de(id){
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if(this.readyState === 4){
+        if(this.status === 200){
+          let json = JSON.parse(this.responseText)
+          if(json.status === "1"){
+            alert("删除成功！！")
+            location.reload()
+          }
+          else {
+            alert("操作失败！！")
+          }
+        }
+        else {
+          alert("操作失败！！")
+        }
+      }
+    }
+    xhr.open("GET", "<%= request.getContextPath() %>/user/delete?id=" + id, true)
+    xhr.send()
   }
 
   function resetRequest(id){

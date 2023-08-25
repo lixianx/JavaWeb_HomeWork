@@ -5,6 +5,7 @@ import com.oa.learn.bean.Level;
 import com.oa.learn.bean.User;
 import com.oa.learn.utils.DBUtils;
 import com.oa.learn.utils.Encryption;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -87,9 +88,12 @@ public class UserServlet extends HttpServlet {
         PreparedStatement ps = null;
         ResultSet rs = null;
         int count = 0;
+        HttpSession session = request.getSession(false);
+        ServletContext servletContext = request.getServletContext();
 
         try {
             conn = DBUtils.getConnection();
+            conn.setAutoCommit(false);
             String sql = "select phone, username from user where id=?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, id);
@@ -105,6 +109,7 @@ public class UserServlet extends HttpServlet {
             ps.setString(1, hashedResetPassword);
             ps.setString(2, id);
             count = ps.executeUpdate();
+            conn.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -115,6 +120,7 @@ public class UserServlet extends HttpServlet {
 
     /**
      * 删除用户
+     * 我也不知道是什么原因，直接传用户名老是报错，所以才传的id
      * @param request
      * @param response
      * @throws ServletException
@@ -125,25 +131,47 @@ public class UserServlet extends HttpServlet {
         String id = request.getParameter("id");
         Connection conn = null;
         PreparedStatement ps = null;
+        ResultSet rs = null;
+        String username = "";
         int count = 0;
 
         try {
             conn = DBUtils.getConnection();
-            String sql = "delete from user where id=?";
-            ps = conn.prepareStatement(sql);
+            conn.setAutoCommit(false);
+            String sql1 = "select username from user where id=?";
+            ps = conn.prepareStatement(sql1);
             ps.setString(1, id);
-            count = ps.executeUpdate();
+            rs = ps.executeQuery();
+            if(rs.next()){
+                username = rs.getString("username");
+                String sql2 = "delete from history where username=?";
+                ps = conn.prepareStatement(sql2);
+                ps.setString(1, username);
+                count = ps.executeUpdate();
+                String sql3 = "delete from user where id=?";
+                ps = conn.prepareStatement(sql3);
+                ps.setString(1, id);
+                count = ps.executeUpdate();
+                if(count == 1){
+                    conn.commit();
+                }
+            }
+            else {
+                response.sendRedirect(request.getContextPath() + "/error.jsp");
+            }
         } catch (SQLException e) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             throw new RuntimeException(e);
         } finally {
-            DBUtils.close(conn, ps, null);
+            DBUtils.close(conn, ps, rs);
         }
-        if(count == 1){
-            response.sendRedirect(request.getContextPath() + "/userlist.jsp");
-        }
-        else {
-            response.sendRedirect(request.getContextPath() + "/error.jsp");
-        }
+        response.getWriter().print("{\"status\":\""+count+"\"}");
 
     }
 
@@ -167,10 +195,10 @@ public class UserServlet extends HttpServlet {
             conn = DBUtils.getConnection();
             String sql = "select * from user where username like ?";
             ps = conn.prepareStatement(sql);
-            ps.setString(1, keywords + "%");
+            ps.setString(1, "%" + keywords + "%");
             rs = ps.executeQuery();
             while(rs.next()){
-                System.out.println(rs.getString("username"));
+                //System.out.println(rs.getString("username"));
                 String id = rs.getString("id");
                 String role = rs.getString("role");
                 String username = rs.getString("username");

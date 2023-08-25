@@ -70,7 +70,7 @@
                         if(json.status === true){
                             //条件1
                             flag1 = true
-                            document.getElementById("oldPassword-error").innerHTML = "密码正确"
+                            document.getElementById("oldPassword-error").innerHTML = "<img src=\"${pageContext.request.contextPath}/images/zq3.png\" width=\"25\" height=\"25\">";
                             document.getElementById("oldPassword-error").style.color = "blue";
                         }
                         else {
@@ -98,11 +98,11 @@
                         //条件2
                         //密码符合要求
                        flag2 = true
-                        document.getElementById("password-error").innerText = "<img id=\"test\" src=\"/oa3/images/zq1.png\" width=\"25\" height=\"25\">"
+                        document.getElementById("password-error").innerHTML = "<img src=\"${pageContext.request.contextPath}/images/zq3.png\" width=\"25\" height=\"25\">";
                     } else {
                         // 密码不符合要求
                         flag2 = false
-                        document.getElementById("password-error").innerText = "密码必须是大小写字母、数字和标点符号的组合，并且长度大于8个字符!";
+                        document.getElementById("password-error").innerHTML = "密码必须是大小写字母、数字和标点符号的组合，并且长度大于8个字符!";
                         document.getElementById("password-error").style.color = "red";
                     }
                 }
